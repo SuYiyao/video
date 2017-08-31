@@ -29,6 +29,7 @@ public class AdminController {
 		
 		Admin ad = as.findUserByNameAndPwd(av);
 		if (ad == null) {
+			
 			req.getSession().setAttribute("errorMessage", "用户名或密码错误");
 			return "forward:/WEB-INF/view/admin/login.jsp"; 
 		} else {
