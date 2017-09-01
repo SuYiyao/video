@@ -2,9 +2,11 @@ package com.zhiyou100.video.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zhiyou100.video.model.Speaker;
@@ -13,7 +15,7 @@ import com.zhiyou100.video.service.SpeakerService;
 import com.zhiyou100.video.utils.Page;
 
 @Controller
-@RequestMapping("/speaker")
+@RequestMapping("/admin/speaker")
 public class SpeakerController {
 
 	@Autowired
@@ -52,7 +54,7 @@ public class SpeakerController {
 		
 		ss.addSpeaker(speaker);
 		
-		return "redirect:/speaker/speakerList.action";
+		return "redirect:/admin/speaker/speakerList.action";
 	}
 	@RequestMapping(value="/editSpeaker.action",method = RequestMethod.GET)
 	public ModelAndView editSpeaker(int id){
@@ -65,12 +67,13 @@ public class SpeakerController {
 	@RequestMapping(value="/editSpeaker.action",method = RequestMethod.POST)
 	public String editSpeaker(Speaker sp){
 		ss.editSpeaker(sp);
-		return "redirect:/speaker/speakerList.action";
+		return "redirect:/admin/speaker/speakerList.action";
 	}
 	@RequestMapping("/deleteSpeaker.action")
+	@ResponseBody
 	public String deleteSpeaker(int id){
 		ss.deleteSpeaker(id);
-		return "redirect:/speaker/speakerList.action";
+		return "success";
 	}
 	
 	

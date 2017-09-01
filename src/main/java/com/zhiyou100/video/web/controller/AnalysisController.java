@@ -13,7 +13,7 @@ import com.zhiyou100.video.service.AnalysisService;
 import com.zhiyou100.video.service.VideoService;
 
 @Controller
-@RequestMapping("/analysis")
+@RequestMapping("/admin/analysis")
 public class AnalysisController {
 
 	@Autowired

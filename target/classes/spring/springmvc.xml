@@ -26,17 +26,27 @@
 	<property name="suffix" value=".jsp"></property>
 	</bean>
 	<!-- 配置全局异常处理 -->
-<!-- 	<bean class="com.zhiyou100.video.utils.CustomException"></bean> -->
+<!-- 	<bean class="com.zhiyou100.video.web.exception.CustomException"></bean> -->
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- <property name="maxUploadSize" value="6291456"></property> -->
 	</bean>
-	
-	 <!-- <mvc:interceptors>
+	 <mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/login.action"/>
-			<bean class="com.zhiyou100.video.utils.CustomInterceptor"></bean>
+			<mvc:mapping path="/admin/**"/>
+			<mvc:exclude-mapping path="/admin/login.action"/>
+			<bean class="com.zhiyou100.video.web.interceptor.adminInterceptor"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors>  -->
+		<mvc:interceptor>
+			<mvc:mapping path="/front/user/**"/>
+			<mvc:exclude-mapping path="/front/user/login.action"/>
+			<mvc:exclude-mapping path="/front/user/regist.action"/>
+			<mvc:exclude-mapping path="/front/user/forgetpwd.action"/>
+			<mvc:exclude-mapping path="/front/user/sendEmail.action"/>
+			<mvc:exclude-mapping path="/front/user/resetpwd.action"/>
+			<mvc:exclude-mapping path="/front/user/resetpwd2.action"/>
+			
+			<bean class="com.zhiyou100.video.web.interceptor.frontInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>  
 </beans>

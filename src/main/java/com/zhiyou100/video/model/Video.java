@@ -34,10 +34,18 @@ public class Video {
     private String sName;
     private String cName;
     
-    
+    private String videoLengthStr;
     
 
-    public String getsName() {
+    public String getVideoLengthStr() {
+		return videoLengthStr;
+	}
+
+	public void setVideoLengthStr(String videoLengthStr) {
+		this.videoLengthStr = videoLengthStr;
+	}
+
+	public String getsName() {
 		return sName;
 	}
 
@@ -172,8 +180,10 @@ public class Video {
 				+ ", videoLength=" + videoLength + ", videoImageUrl=" + videoImageUrl + ", videoUrl=" + videoUrl
 				+ ", videoDescr=" + videoDescr + ", insertTime=" + insertTime + ", updateTime=" + updateTime
 				+ ", videoPlayTimes=" + videoPlayTimes + ", co=" + co + ", sp=" + sp + ", currentPage=" + currentPage
-				+ ", sName=" + sName + ", cName=" + cName + "]";
+				+ ", sName=" + sName + ", cName=" + cName + ", videoLengthStr=" + videoLengthStr + "]";
 	}
+
+	
 
 	
 }

@@ -52,21 +52,19 @@ $(function(){
     </header>
     <main>
         <div class="container">
-            <form class="ma" action="${pageContext.request.contextPath }/front/user/resetpwd2.do" method="post" id="checkForm">
+            <form class="ma" action="${pageContext.request.contextPath }/front/user/resetpwd2.action" method="post" id="checkForm">
                <input type="hidden" name="email" value="${uu.email}"/>
                 <input type="hidden" name="captcha" value="${uu.captcha}"/>
                 <div class="form_header">
                     <div class="form_title">
                         <h2>重置密码</h2>
                     </div>
-                    
                 </div>
                 <div class="form_body">
                     <input type="password" placeholder="请输入新密码" id="password" name="password">
                     <input type="password" style="width:100%" placeholder="再次输入新密码" id="password02" name="pwdAgain">
                     <input type="submit" style="margin:0px;width:100%" value="提交">
                 </div>
-                
             </form>
         </div>
     </main>

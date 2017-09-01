@@ -24,7 +24,7 @@
     </header>
     <main>
         <div class="container">
-            <form class="ma" action="${pageContext.request.contextPath }/front/user/resetpwd.do" method="post" >
+            <form class="ma" action="${pageContext.request.contextPath }/front/user/resetpwd.action" method="post" >
                 <div class="form_header">
                     <div class="form_title">
                         <h2>忘记密码</h2>
@@ -55,7 +55,7 @@
 			var email = $('#email').val();
 			//改为ajax提交邮箱
 			if(email!=null&&email!=''){
-				$.post('/maven-project/front/user/sendEmail.do',{email:email},function(data){
+				$.post('${pageContext.request.contextPath }/front/user/sendEmail.action',{email:email},function(data){
 					console.log(data);
 					if(data.success){
 						alert('验证码已发送到邮箱，请注意查收');

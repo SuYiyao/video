@@ -23,11 +23,11 @@
             <h2>我的资料</h2>
             <div id="profile_tab">
                <ul class="profile_tab_header f_left clearfix">
-                    <li><a href="profile.do?id=${sessionScope._front_user.id }">更改资料</a></li>
+                    <li><a href="${pageContext.request.contextPath }/front/user/profile.action?id=${sessionScope._front_user.id }">更改资料</a></li>
                     <li class="profile_tab_line">|</li>
-                    <li><a href="avatar.do?id=${sessionScope._front_user.id }">更改头像</a></li>
+                    <li><a href="${pageContext.request.contextPath }/front/user/avatar.action?id=${sessionScope._front_user.id }">更改头像</a></li>
                     <li class="profile_tab_line">|</li>
-                    <li><a href="password.do?id=${sessionScope._front_user.id }">密码安全</a></li>
+                    <li><a href="${pageContext.request.contextPath }/front/user/password.action?id=${sessionScope._front_user.id }">密码安全</a></li>
                 </ul>
                 <div class="proflle_tab_body">
                     <div class="proflle_tab_workplace clearfix">
@@ -42,7 +42,7 @@
                             <p style="text-align: center;">当前头像</p>
                         </div>
                         <div class="profile_ifo_area">
-                            <form id="upload_form" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }/front/user/updateAvatar.do" >
+                            <form id="upload_form" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }/front/user/updateAvatar.action" >
                                 <p>请选择图像文件</p>
                                 <div>
                                 <input type="hidden" name="id" value="${user.id }">

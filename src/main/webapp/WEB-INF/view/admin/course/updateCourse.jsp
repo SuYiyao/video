@@ -17,8 +17,9 @@
 <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 </head>
 <body>
-	
-
+	<jsp:include page="/WEB-INF/view/admin/header.jsp">
+		<jsp:param value="course" name="fromJsp"/>
+	</jsp:include>
 	<div class="container theme-showcase" role="main">
 
 		<!-- Main jumbotron for a primary marketing message or call to action -->
@@ -26,7 +27,7 @@
 			<h1>编辑课程</h1>
 		</div>
 
-		<form class="form-horizontal" action="${pageContext.request.contextPath }/course/editCourse.action" method="post">
+		<form class="form-horizontal" action="${pageContext.request.contextPath }/admin/course/editCourse.action" method="post">
 			<div class="form-group">
 				<label for="techer" class="col-sm-2 control-label">所属学科</label>
 				<div class="col-sm-10">

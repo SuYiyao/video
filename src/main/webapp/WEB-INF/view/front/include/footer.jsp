@@ -45,7 +45,7 @@
 				<input type="email" id="loginEmail" placeholder="请输入邮箱" name="email">
 				<input type="password" id="loginPassword" placeholder="请输入密码" name="password">
 				<div id="forget">
-					<a href="${pageContext.request.contextPath }/front/user/forgetpwd.do">忘记密码？</a>
+					<a href="${pageContext.request.contextPath }/front/user/forgetpwd.action">忘记密码？</a>
 				</div>
 				<input type="submit" value="登&#x3000;录">
 			</form>
@@ -61,7 +61,7 @@
 			<img src="${pageContext.request.contextPath }/static/img/logo.png" alt="" class="ma">
 		</div>
 		<div class="mask_content_body">
-			<form id="regForm" action="${pageContext.request.contextPath }/front/user/regist.do" method="post">
+			<form id="regForm" action="${pageContext.request.contextPath }/front/user/regist.action" method="post">
 				<h3>新用户注册</h3>
 				<input type="email" id="regEmail" placeholder="请输入邮箱" name="email">
 				<input type="password" id="regPsw" placeholder="请输入密码" name="password">

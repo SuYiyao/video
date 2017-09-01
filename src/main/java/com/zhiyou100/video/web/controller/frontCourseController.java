@@ -14,6 +14,7 @@ import com.zhiyou100.video.model.Subject;
 import com.zhiyou100.video.model.Video;
 import com.zhiyou100.video.service.frontCourseService;
 import com.zhiyou100.video.service.frontVideoService;
+import com.zhiyou100.video.utils.secToTime;
 
 @Controller
 @RequestMapping("/front/course")
@@ -23,7 +24,7 @@ public class frontCourseController {
 	frontCourseService fc;
 	@Autowired
 	frontVideoService fv;
-	@RequestMapping("/index.do")
+	@RequestMapping("/index.action")
 	public String index(Integer subjectId,Model mo){
 		mo.addAttribute("subjectId", subjectId);
 		Subject sub = fc.findSubjectNameBySubjectId(subjectId);
@@ -32,6 +33,9 @@ public class frontCourseController {
 		mo.addAttribute("courses", li);
 		for(Course cou : li){
 			List<Video> list = fv.findVideos(cou.getId());
+			for(Video vi :list){
+				vi.setVideoLengthStr(secToTime.secToTime(vi.getVideoLength()));
+			}
 			cou.setVideoList(list);
 		}
 		return "/front/course/index";

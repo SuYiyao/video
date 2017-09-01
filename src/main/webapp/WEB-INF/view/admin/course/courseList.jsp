@@ -16,25 +16,55 @@
 <script
 	src="${pageContext.request.contextPath }/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+<link href="${pageContext.request.contextPath }/css/jquery-confirm.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath }/js/jquery-confirm.js"></script>
+<script type="text/javascript">
+function deleteInfo(id) {
+	$.confirm({
+		title: '提示',
+	    content: '确定要删除此条记录吗?',
+	    buttons: {
+	        confirm: {
+	        	text: '确定',
+	        	action: function () {
+	        		$.ajax({
+	        			url:"${pageContext.request.contextPath }/admin/course/deleteCourse.action",
+	        			dataType:"text",
+	        			type:"post",
+	        			data:{"id":id},
+	        			success:function(msg){
+	        				if(msg=="success"){
+	        					location.reload();
+	        				}
+	        			}
+	        		});
+	        	}
+	        },
+	        cancel: { 
+	        	text: '取消',
+	        	function () {
+	        	},
+	    	}
+	    }
+		
+	});
+}
+</script>
 </head>
 <body>
-	
-
+<jsp:include page="/WEB-INF/view/admin/header.jsp">
+		<jsp:param value="course" name="fromJsp"/>
+	</jsp:include>
 	<div class="container theme-showcase" role="main">
-
 		<!-- Main jumbotron for a primary marketing message or call to action -->
 		<div class="jumbotron">
 			<h1>课程列表-课程管理</h1>
 		</div>
-
-
-
 		<div class="box">
 			<div>
-				<a class="btn btn-primary" href="${pageContext.request.contextPath }/course/addCourse.action"">添加课程</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath }/admin/course/addCourse.action"">添加课程</a>
 			</div>
 		</div>
-
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -47,23 +77,24 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:if test="${not empty page.rows }">
 			<c:forEach var="courseVO" items="${page.rows }" varStatus="status">
 				<tr>
 					<th scope="row">${status.count+(page.page-1)*5  }</th>
 					<td>${courseVO.courseName }</td>
 					<td>${courseVO.subjectName }</td>
 					<td>${courseVO.courseDescr}</td>
-					<td><a class="glyphicon glyphicon-edit" aria-hidden="true" href="${pageContext.request.contextPath }/course/editCourse.action?id=${courseVO.id}"></a></td>
-					<td><a class="glyphicon glyphicon-trash" aria-hidden="true" href="${pageContext.request.contextPath }/course/deleteCourse.action?id=${courseVO.id}"></a></td>
+					<td><a class="glyphicon glyphicon-edit" aria-hidden="true" href="${pageContext.request.contextPath }/admin/course/editCourse.action?id=${courseVO.id}"></a></td>
+					<td><a class="glyphicon glyphicon-trash" aria-hidden="true" href="#" onclick="deleteInfo(${courseVO.id})"></a></td>
 				</tr>
 			</c:forEach>
-				
+			</c:if>
+			<c:if test="${empty page.rows }">
+ 				<tr><td>当前查询结果为空!</td></tr>
+ 			</c:if>
 			</tbody>
 		</table>
-		<syy:page url="${pageContext.request.contextPath }/course/courseList.action"></syy:page>
-		
-
-
+		<syy:page url="${pageContext.request.contextPath }/admin/course/courseList.action"></syy:page>
 	</div>
 </body>
 </html>

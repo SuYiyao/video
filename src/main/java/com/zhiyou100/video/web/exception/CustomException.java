@@ -1,4 +1,4 @@
-package com.zhiyou100.video.utils;
+package com.zhiyou100.video.web.exception;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

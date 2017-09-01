@@ -3,13 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>jieMian</title>
+<title>课程管理</title>
 <link href="${pageContext.request.contextPath }/css/bootstrap.min.css"
 	rel="stylesheet">
 <script
@@ -17,16 +16,16 @@
 <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 </head>
 <body>
-	
-
+	<jsp:include page="/WEB-INF/view/admin/header.jsp">
+		<jsp:param value="course" name="fromJsp"/>
+	</jsp:include>
 	<div class="container theme-showcase" role="main">
-
 		<!-- Main jumbotron for a primary marketing message or call to action -->
 		<div class="jumbotron">
 			<h1>添加课程</h1>
 		</div>
 
-		<form class="form-horizontal" action="${pageContext.request.contextPath }/course/addCourse.action" method="post">
+		<form class="form-horizontal" action="${pageContext.request.contextPath }/admin/course/addCourse.action" method="post">
 			<div class="form-group">
 				<label for="techer" class="col-sm-2 control-label">所属学科</label>
 				<div class="col-sm-10">

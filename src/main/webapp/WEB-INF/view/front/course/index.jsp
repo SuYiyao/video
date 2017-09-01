@@ -48,7 +48,7 @@
 									<span class="count" title="观看次数">
 									<img src="${pageContext.request.contextPath }/static/img/count.png" alt="">${video.videoPlayTimes }</span>
 									<span class="duration" title="视频时长">
-										<img src="${pageContext.request.contextPath }/static/img/player.png" alt="">${video.videoLength }</span>
+										<img src="${pageContext.request.contextPath }/static/img/player.png" alt="">${video.videoLengthStr }</span>
 								</div>
 							</li>
 						</c:forEach>
@@ -64,7 +64,7 @@
 	<script type="text/javascript">
 		function getVideo(id){
 			var subjectId=$('#subjectId').val();
-			location.href='/maven-project/front/video/index.do?videoId='+id+'&subjectId='+subjectId;
+			location.href='${pageContext.request.contextPath }/front/video/index.action?videoId='+id+'&subjectId='+subjectId;
 		}
 	</script>
 

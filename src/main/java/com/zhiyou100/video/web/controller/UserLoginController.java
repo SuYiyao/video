@@ -26,11 +26,9 @@ import com.zhiyou100.video.utils.MailUtil;
 @Controller
 @RequestMapping("/front/user")
 public class UserLoginController {
-
 	@Autowired
 	UserService us;
-	
-	@RequestMapping(value="/login.do",method=RequestMethod.POST)
+	@RequestMapping(value="/login.action",method=RequestMethod.POST)
 	@ResponseBody
 	public Result login(User u,HttpSession se){
 
@@ -45,12 +43,12 @@ public class UserLoginController {
 		}
 		return re;
 	}
-	@RequestMapping("/logout.do")
+	@RequestMapping("/logout.action")
 	public String logout(HttpSession se){
 		se.removeAttribute("_front_user");
 		return "redirect:/index.jsp";
 	}
-	@RequestMapping(value="/regist.do",method=RequestMethod.POST)
+	@RequestMapping(value="/regist.action",method=RequestMethod.POST)
 	@ResponseBody
 	public Result regist(User u){
 
@@ -64,40 +62,40 @@ public class UserLoginController {
 		}
 		return re;
 	}
-	@RequestMapping("/forgetpwd.do")
+	@RequestMapping("/forgetpwd.action")
 	public String forgetpwd(){
 		
 		return "/front/user/forget_pwd";
 	}
-	@RequestMapping("/index.do")
+	@RequestMapping("/index.action")
 	public String index(Integer id,Model mo){
 		User u = us.find(id);
 		mo.addAttribute("user", u);
 		
 		return "/front/user/index";
 	}
-	@RequestMapping("/profile.do")
+	@RequestMapping("/profile.action")
 	public String profile(Integer id,Model mo){
 		User u = us.find(id);
 		mo.addAttribute("user", u);
 		
 		return "/front/user/profile";
 	}
-	@RequestMapping("/updateProfile.do")
+	@RequestMapping("/updateProfile.action")
 	public String updateProfile(User u){
 		us.updateProfile(u);
-		return "forward:/front/user/index.do";
+		return "forward:/front/user/index.action";
 	}
 	
-	@RequestMapping("/avatar.do")
+	@RequestMapping("/avatar.action")
 	public String avatar(Integer id,Model mo){
 		User u = us.find(id);
 		mo.addAttribute("user", u);
 		
 		return "/front/user/avatar";
 	}
-	@RequestMapping("/updateAvatar.do")
-	public String updateAvatar(User u,MultipartFile pic,Model mo) throws Exception{
+	@RequestMapping("/updateAvatar.action")
+	public String updateAvatar(User u,MultipartFile pic,Model mo,HttpSession se) throws Exception{
 		
 		String str = UUID.randomUUID().toString().replaceAll("-", "");
 		String ext = FilenameUtils.getExtension(pic.getOriginalFilename());
@@ -108,16 +106,17 @@ public class UserLoginController {
 		us.updateAvatar(u);
 		User uu = us.find(u.getId());
 		mo.addAttribute("user", uu);
+		se.setAttribute("_front_user", uu);
 		return "/front/user/avatar";
 	}
-	@RequestMapping("/password.do")
+	@RequestMapping("/password.action")
 	public String password(Integer id,Model mo){
 		User u = us.find(id);
 		mo.addAttribute("user", u);
 		
 		return "/front/user/password";
 	}
-	@RequestMapping("/updatePwd.do")
+	@RequestMapping("/updatePwd.action")
 	public String updatePwd(Integer id,Model mo,String oldPassword,String password){
 		User u = us.find(id);
 		String message = null;
@@ -135,7 +134,7 @@ public class UserLoginController {
 		mo.addAttribute("user", u);
 		return "/front/user/password";
 	}
-	@RequestMapping("/sendEmail.do")
+	@RequestMapping("/sendEmail.action")
 	@ResponseBody
 	public Result sendEmail(String email) throws Exception{
 		Random ran = new Random();
@@ -148,11 +147,11 @@ public class UserLoginController {
 			user.setCaptcha(a);
 			us.updateCaptcha(user);
 		}else{
-			re.setMessage("旧密码输入错误,请重新输入");
+			re.setMessage("该邮箱不存在,请重新输入");
 		}
 		return re;
 	}
-	@RequestMapping("/resetpwd.do")
+	@RequestMapping("/resetpwd.action")
 	public String resetpwd(User u,Model mo){
 		User user = us.findUserByCaptcha(u);
 		
@@ -164,7 +163,7 @@ public class UserLoginController {
 			return "/front/user/forget_pwd";
 		}
 	}
-	@RequestMapping("/resetpwd2.do")
+	@RequestMapping("/resetpwd2.action")
 	public String resetpwd2(User u,String password){
 		User user = us.findUserByCaptcha(u);
 		user.setPassword(password);

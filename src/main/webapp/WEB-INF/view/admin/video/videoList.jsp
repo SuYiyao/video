@@ -10,15 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>视频管理</title>
-<link href="${pageContext.request.contextPath }/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath }/css/jquery-confirm.css"
-	rel="stylesheet">
-<script
-	src="${pageContext.request.contextPath }/js/jquery-1.12.4.min.js"></script>
+<link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/css/jquery-confirm.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath }/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/jquery-confirm.js"></script>
-
 <script type="text/javascript">
 var count = 0;
 function allCheck(m){
@@ -43,7 +39,7 @@ function deleteInfo(id){
 	        	text: '确定',
 	        	action: function () {
 	        		$.ajax({
-	        			url:"${pageContext.request.contextPath }/video/deleteVideo.action",
+	        			url:"${pageContext.request.contextPath }/admin/video/deleteVideo.action",
 	        			dataType:"text",
 	        			type:"post",
 	        			data:{"id":id},
@@ -62,14 +58,7 @@ function deleteInfo(id){
 	    	}
 	    }
 	});
-	   
-	  
-	   
-	   
-	}
-
-	
-	
+}
 function deleteAll(){
 	if(count == 0){
 		$.alert({
@@ -95,13 +84,6 @@ function deleteAll(){
 	    	}
 	    }
 	});
-	
-	
-	
-	
-	
-	   
-	   
 }
 function selectBox(the){
 	//alert(count);
@@ -123,17 +105,20 @@ function selectBox(the){
 
 </head>
 <body>
+<jsp:include page="/WEB-INF/view/admin/header.jsp">
+	<jsp:param value="video" name="fromJsp"/>
+</jsp:include>
 	<div class="container theme-showcase" role="main">
 		<div class="jumbotron">
 			<h1>视频列表-视频管理</h1>
 		</div>
 		<div class="box">
-			<a class="btn btn-primary" type="button" href="${pageContext.request.contextPath }/video/addVideo.action">添加视频</a>
+			<a class="btn btn-primary" type="button" href="${pageContext.request.contextPath }/admin/video/addVideo.action">添加视频</a>
 			<a class="btn btn-primary" type="button" onclick="deleteAll()">
 				批量删除<span class="badge">0</span>
 			</a>
 			<div style="float: right;">
-				<form class="form-inline" action="${pageContext.request.contextPath }/video/videoList.action">
+				<form class="form-inline" action="${pageContext.request.contextPath }/admin/video/videoList.action">
 					<input type="text" class="form-control" placeholder="视频标题" name="videoTitle" value="${videoTitle}">
 					<select class="form-control" name="speakerId">
 						<option value="0">请选择主讲人</option>
@@ -151,10 +136,9 @@ function selectBox(the){
 				</form>
 			</div>
 		</div>
-		<form action="${pageContext.request.contextPath }/video/deleteAllVideo.action" id="deleteAll">
+		<form action="${pageContext.request.contextPath }/admin/video/deleteAllVideo.action" id="deleteAll">
 		<table class="table table-hover">
 			<thead>
-			
 				<tr>
 					<th class="col-md-0"><input type="checkbox" id="checkAll" onclick="allCheck(this)"></th>
 					<th class="col-md-0">序号</th>
@@ -180,7 +164,7 @@ function selectBox(the){
 					<td>${video.cName }</td>
 					<td>${video.videoLength }</td>
 					<td>${video.videoPlayTimes }</td>
-					<td><a class="glyphicon glyphicon-edit" aria-hidden="true" href="${pageContext.request.contextPath }/video/editVideo.action?id=${video.id}"></a></td>
+					<td><a class="glyphicon glyphicon-edit" aria-hidden="true" href="${pageContext.request.contextPath }/admin/video/editVideo.action?id=${video.id}"></a></td>
 					<td><a class="glyphicon glyphicon-trash" aria-hidden="true" href="#" onclick="deleteInfo(${video.id})"></a></td>
 				</tr>
 			</c:forEach>
@@ -191,7 +175,7 @@ function selectBox(the){
 			</tbody>
 		</table>
 		</form>
-		<syy:page url="${pageContext.request.contextPath }/video/videoList.action"></syy:page>
+		<syy:page url="${pageContext.request.contextPath }/admin/video/videoList.action"></syy:page>
 	</div>
 </body>
 </html>

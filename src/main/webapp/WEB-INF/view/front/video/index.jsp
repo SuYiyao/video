@@ -37,9 +37,9 @@
     <script>
         $(function () {
         	var id = $('#videoId').val();
-           $('#content').load('/maven-project/front/video/videoData.do?videoId='+id);
+           $('#content').load('${pageContext.request.contextPath }/front/video/videoData.action?videoId='+id);
            //播放量统计,不需要返回结果处理
-           $.get('/maven-project/front/video/state.do?videoId='+id);
+           $.get('${pageContext.request.contextPath }/front/video/state.action?videoId='+id);
 		});
     </script>
 </body>

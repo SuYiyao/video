@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zhiyou100.video.model.Course;
@@ -18,7 +19,7 @@ import com.zhiyou100.video.service.SubjectService;
 import com.zhiyou100.video.utils.Page;
 
 @Controller
-@RequestMapping("/course")
+@RequestMapping("/admin/course")
 public class CourseController {
 
 	@Autowired
@@ -46,7 +47,7 @@ public class CourseController {
 	@RequestMapping(value="/addCourse.action",method=RequestMethod.POST)
 	public String addCourse(Course co){
 		cs.addCourse(co);
-		return"redirect:/course/courseList.action";
+		return"redirect:/admin/course/courseList.action";
 	}
 	@RequestMapping(value="/editCourse.action",method=RequestMethod.GET)
 	public ModelAndView editCourse(int id){
@@ -61,12 +62,13 @@ public class CourseController {
 	@RequestMapping(value="/editCourse.action",method=RequestMethod.POST)
 	public String editCourse(Course co){
 		cs.editCourse(co);
-		return"redirect:/course/courseList.action";
+		return"redirect:/admin/course/courseList.action";
 	}
 	@RequestMapping("/deleteCourse.action")
+	@ResponseBody
 	public String deleteCourse(int id){
 		cs.editCourse(id);
-		return"redirect:/course/courseList.action";
+		return"success";
 	}
 	
 }

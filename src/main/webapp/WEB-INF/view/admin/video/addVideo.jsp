@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>jieMian</title>
+<title>视频管理</title>
 <link href="${pageContext.request.contextPath }/css/bootstrap.min.css"
 	rel="stylesheet">
 <script
@@ -17,6 +17,9 @@
 <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/view/admin/header.jsp">
+	<jsp:param value="video" name="fromJsp"/>
+</jsp:include>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -54,7 +57,7 @@
 			<h1>视频列表-视频管理</h1>
 		</div>
 
-		<form class="form-horizontal" action="${pageContext.request.contextPath }/video/addVideo.action" method="post">
+		<form class="form-horizontal" action="${pageContext.request.contextPath }/admin/video/addVideo.action" method="post">
 			<div class="form-group">
 				<label for="vidioTitle" class="col-sm-2 control-label">视频标题</label>
 				<div class="col-sm-10">

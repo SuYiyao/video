@@ -45,7 +45,7 @@ $(function(){
 	<body>	
 		<div style="margin: auto; padding-top: 250px; width: 300px; height: 300px;">
 		<img src="${pageContext.request.contextPath }/img/logo.png" />
-		<form action="${pageContext.request.contextPath }/login.action" id="checkForm">
+		<form action="${pageContext.request.contextPath }/admin/login.action" id="checkForm">
 			<div class="form-group">
     			<input type="text" class="form-control" name="loginName" value="admin" placeholder="用户名">
   			</div>
