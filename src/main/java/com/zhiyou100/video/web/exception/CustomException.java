@@ -14,7 +14,7 @@ public class CustomException implements HandlerExceptionResolver {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("obj", obj);
 		mav.addObject("exception", exception);
-		mav.setViewName("role/error");
+		mav.setViewName("exception/error");
 		return mav;
 	}
 

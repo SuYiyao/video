@@ -28,9 +28,8 @@
 					</c:if>
 
 					<c:if test="${not empty sessionScope._front_user.headUrl}">
-						<img id="avatar" src="/pic/${user.headUrl}" alt="">
+						<img id="avatar" src="${user.headUrl}" alt="">
 					</c:if>
-
 				</a>
 				<a href="${pageContext.request.contextPath }/front/user/logout.action" id="lay_out">退出</a>
 			</div>

@@ -12,6 +12,7 @@ public class AdminController {
 	AdminService as;
 	@RequestMapping("/login.action")
 	public String login(Admin av,HttpServletRequest req){
+		//int a = 1/0;
 		av.getLoginName();
 		av.getLoginPwd();
 		Admin ad = as.findUserByNameAndPwd(av);

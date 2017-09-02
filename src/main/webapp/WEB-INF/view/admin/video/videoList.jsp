@@ -24,7 +24,7 @@ function allCheck(m){
 	}else{
 		count = 0;
 	}
-	$("span")[0].innerHTML=count;
+	$(".badge").text(count);
 }
 function deleteInfo(id){
 	  /* var orConfirm = confirm("确定要删除此条记录吗?");
@@ -92,7 +92,7 @@ function selectBox(the){
 	}else{
 		count--;
 	}
-	$("span")[0].innerHTML=count;
+	$(".badge").text(count);
 	if(count == $("input[name=choose]").length){
 		$("#checkAll").prop("checked",true);
 	}else{
@@ -114,9 +114,7 @@ function selectBox(the){
 		</div>
 		<div class="box">
 			<a class="btn btn-primary" type="button" href="${pageContext.request.contextPath }/admin/video/addVideo.action">添加视频</a>
-			<a class="btn btn-primary" type="button" onclick="deleteAll()">
-				批量删除<span class="badge">0</span>
-			</a>
+			<a class="btn btn-primary" type="button" onclick="deleteAll()">批量删除<span class="badge">0</span></a>
 			<div style="float: right;">
 				<form class="form-inline" action="${pageContext.request.contextPath }/admin/video/videoList.action">
 					<input type="text" class="form-control" placeholder="视频标题" name="videoTitle" value="${videoTitle}">

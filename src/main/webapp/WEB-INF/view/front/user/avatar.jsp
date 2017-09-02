@@ -37,7 +37,7 @@
                             </c:if>
                             
                             <c:if test="${not empty user.headUrl}">
-                                  <img width="200px" height="200px" src="/pic/${user.headUrl}">
+                                  <img width="200px" height="200px" src="${user.headUrl}">
                             </c:if>
                             <p style="text-align: center;">当前头像</p>
                         </div>

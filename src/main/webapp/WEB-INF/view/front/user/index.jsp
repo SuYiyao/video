@@ -40,7 +40,7 @@
 		                      </c:if>
 		                      
 		                      <c:if test="${not empty user.headUrl}">
-		                         <img id="avatar" width="200px" heigth="200px" src="/pic/${user.headUrl}" alt="">
+		                         <img id="avatar" width="200px" heigth="200px" src="${user.headUrl}" alt="">
 		                      </c:if>
                             <p>
                             <c:if test="${not empty user.nickName}">

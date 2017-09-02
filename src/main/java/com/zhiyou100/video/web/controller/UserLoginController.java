@@ -2,6 +2,7 @@ package com.zhiyou100.video.web.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -20,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.zhiyou100.video.model.Result;
 import com.zhiyou100.video.model.User;
 import com.zhiyou100.video.service.UserService;
+import com.zhiyou100.video.utils.EmailCode;
 import com.zhiyou100.video.utils.MD5Utils;
 import com.zhiyou100.video.utils.MailUtil;
+import com.zhiyou100.video.utils.PictureUtil;
 
 @Controller
 @RequestMapping("/front/user")
@@ -36,7 +39,6 @@ public class UserLoginController {
 		Result re = new Result();
 		if(user!=null){
 			re.setSuccess(true);
-			
 			se.setAttribute("_front_user", user);
 		}else{
 			re.setMessage("登录失败");
@@ -97,12 +99,15 @@ public class UserLoginController {
 	@RequestMapping("/updateAvatar.action")
 	public String updateAvatar(User u,MultipartFile pic,Model mo,HttpSession se) throws Exception{
 		
-		String str = UUID.randomUUID().toString().replaceAll("-", "");
-		String ext = FilenameUtils.getExtension(pic.getOriginalFilename());
-		String fileName = str+"."+ext;
-		String path = "d:\\upload";
-		pic.transferTo(new File(path+"\\"+fileName));
-		u.setHeadUrl(fileName);
+//		String str = UUID.randomUUID().toString().replaceAll("-", "");
+//		String ext = FilenameUtils.getExtension(pic.getOriginalFilename());
+//		String fileName = str+"."+ext;
+//		String path = "d:\\upload";
+//		pic.transferTo(new File(path+"\\"+fileName));
+//		u.setHeadUrl(fileName);
+		u.setHeadUrl(PictureUtil.getPictureUrl(pic.getOriginalFilename()));
+		u.setUpdateTime(new Date());
+		pic.transferTo(PictureUtil.getPictureFile(u.getHeadUrl()));
 		us.updateAvatar(u);
 		User uu = us.find(u.getId());
 		mo.addAttribute("user", uu);
@@ -137,14 +142,16 @@ public class UserLoginController {
 	@RequestMapping("/sendEmail.action")
 	@ResponseBody
 	public Result sendEmail(String email) throws Exception{
-		Random ran = new Random();
-		String a = ""+(ran.nextInt(99999-10000+1)+10000);
+	//	Random ran = new Random();
+	//	String a = ""+(ran.nextInt(99999-10000+1)+10000);
 		User user = us.findUserByEmail(email);
 		Result re = new Result();
 		if(user!=null){
 			re.setSuccess(true);
-			MailUtil.send(email, "验证码为:", a);
-			user.setCaptcha(a);
+			int a = EmailCode.getRandomCode();
+			String ran = ""+a;
+			MailUtil.send(email, "验证码为:", ran);
+			user.setCaptcha(ran);
 			us.updateCaptcha(user);
 		}else{
 			re.setMessage("该邮箱不存在,请重新输入");
